@@ -5,4 +5,13 @@ const CustomerSchema = new mongoose.Schema({
   taxId: String,
 });
 
+CustomerSchema.virtual("actions", {
+  ref: "Action",
+  localField: "_id",
+  foreignField: "customer",
+});
+
+CustomerSchema.set("toObject", { virtuals: true });
+CustomerSchema.set("toJSON", { virtuals: true });
+
 module.exports = mongoose.model("Customer", CustomerSchema);
